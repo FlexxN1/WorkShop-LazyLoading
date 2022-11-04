@@ -4,7 +4,7 @@
  **/
 /* 
 --------------------------------------------------------------------
-Forma del curso
+//Forma del curso
 
 const min = 1;
 const max = 122;
@@ -39,6 +39,8 @@ addBtn.addEventListener("click", addImg);
 //---------------------------------------------------------------------
 //Reto con Usando Fetch
 
+import { registerImage } from "./lazy" 
+
 const API = 'https://randomfox.ca/floof/'
 const containerNode = document.getElementById('images');
 const btnAdd = document.querySelector("button");
@@ -55,6 +57,7 @@ const fetchImage = async () => {
     const image = document.createElement('img');
     image.src = constUrl;
     image.className = "mx-auto";
+    registerImage(image)
 
     containerImg.appendChild(image);
     containerNode.appendChild(containerImg);
