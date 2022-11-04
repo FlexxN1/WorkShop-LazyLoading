@@ -1,66 +1,57 @@
-/**
- * This file is just a silly example to show everything working in the browser.
- * When you're ready to start on your site, clear the file. Happy hacking!
- **/
-/* 
---------------------------------------------------------------------
-//Forma del curso
+import { registerImage } from "./lazy";
 
-const min = 1;
-const max = 122;
-const random = () => Math.floor(Math.random()*(max - min)) + min;
+const minimum = 1;
+const maximum = 122;
+const random = () => Math.floor(Math.random() * (maximum - minimum)) + minimum;
 
-const createImgeNode = () => {
-    const container = document.createElement("div")
+const createImageNode = () => {
+
+    const container = document.createElement("div");
     container.className = "p-4";
 
     const imagen = document.createElement("img");
-    imagen.className = "mx-auto";
+    imagen.className = "mx-auto rounded-md bg-gray-300";
     imagen.width = "320";
-    imagen.src = `https://randomfox.ca/images/${random()}.jpg`;
+    imagen.dataset.src = `https://randomfox.ca/images/${random()}.jpg`
 
-    container.appendChild(imagen)
+    const imageWrapper = document.createElement("div");
+    imageWrapper.className = "bg-gray-300";
+    imageWrapper.style.minHeight = "100px";
+    imageWrapper.style.display = "inline-block";
+
+    imageWrapper.appendChild(imagen);
+    container.appendChild(imageWrapper);
+    
+    appendedImages++;
+    printLog();
 
     return container;
+
 }
 
-const newImagen = createImgeNode();
+
 const mountNode = document.getElementById("images");
 
-const addBtn = document.querySelector("button");
-const addImg = () => {
-    const newImage = createImgeNode()
-    mountNode.append(newImage);
-}
+const addButton = document.querySelector("#add");
+const cleanButton = document.querySelector("#clean");
 
-addBtn.addEventListener("click", addImg);
-*/
+const addImage = () => {
 
-//---------------------------------------------------------------------
-//Reto con Usando Fetch
-
-import { registerImage } from "./lazy" 
-
-const API = 'https://randomfox.ca/floof/'
-const containerNode = document.getElementById('images');
-const btnAdd = document.querySelector("button");
-const btnClean = document.getElementById('clean');
-
-const fetchImage = async () => {
-    const response = await fetch(API);
-    const responseJSON = await response.json();
-    const constUrl = responseJSON.image;
+    const newImage = createImageNode();
+    mountNode.appendChild(newImage);
+    registerImage(newImage);
     
-    const containerImg = document.createElement('div');
-    containerImg.className = "p-4";
-
-    const image = document.createElement('img');
-    image.src = constUrl;
-    image.className = "mx-auto";
-    registerImage(image)
-
-    containerImg.appendChild(image);
-    containerNode.appendChild(containerImg);
 }
 
-btnAdd.addEventListener('click',fetchImage);
+const cleanImages = () => {
+
+    console.log(mountNode.childNodes);
+
+    [...mountNode.childNodes].forEach(child => {
+        child.remove();
+    }) 
+
+}
+
+addButton.addEventListener("click", addImage)
+cleanButton.addEventListener("click", cleanImages)
