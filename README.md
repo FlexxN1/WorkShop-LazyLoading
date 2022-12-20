@@ -80,3 +80,9 @@ Your app is ready to be deployed!
 ### Q: What about Eject?
 
 No eject needed! Snowpack guarantees zero lock-in, and CSA strives for the same.
+
+## License 🔐
+
+Copyright © 2022 [Juan David Moreno](https://github.com/FlexxN1)
+
+This project is [MIT](https://choosealicense.com/licenses/mit/) licensed
